@@ -27,9 +27,11 @@ def download(link):
     driver.get(link)
     
     try:
+        # visibility_of_element_located
+        # element_to_be_clickable
         e = WebDriverWait(driver, delay).until(EC.any_of(
-            EC.element_to_be_clickable((By.XPATH, '//div[text()="Chords"]')),
-            EC.element_to_be_clickable((By.XPATH, '//span[text()="Download Pdf"]'))
+            EC.visibility_of_element_located((By.XPATH, '//div[text()="Chords"]')),
+            EC.visibility_of_element_located((By.XPATH, '//span[text()="Download Pdf"]'))
         ))
         print("text", e.text)
         if 'CHORDS' in e.text.upper():
@@ -37,7 +39,7 @@ def download(link):
             # e.click()
             driver.execute_script("arguments[0].click()", e)
             try:
-                e = WebDriverWait(driver, delay).until(EC.element_to_be_clickable((By.XPATH, '//span[text()="Print"]')))
+                e = WebDriverWait(driver, delay).until(EC.visibility_of_element_located((By.XPATH, '//span[text()="Print"]')))
                 e = driver.find_element(By.XPATH, '//span[text()="Print"]')
                 # e.click()
                 driver.execute_script("arguments[0].click()", e)
